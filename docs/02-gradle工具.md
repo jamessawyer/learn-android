@@ -597,4 +597,43 @@ Gradle、Kotlin和Java版本之间的关系是开发中需要特别注意的，�
 
 
 
+## 8. gradle distributionUrl bin和all包的区别
+
+在 `gradle-wrapper.properties` 中存在如下配置：
+
+```groovy
+distributionBase=GRADLE_USER_HOME
+distributionPath=wrapper/dists
+# 这里使用腾讯云镜像
+distributionUrl=https\://mirrors.cloud.tencent.com/gradle/gradle-7.2-bin.zip
+# distributionUrl=https\://mirrors.cloud.tencent.com/gradle/gradle-7.2-all.zip
+zipStoreBase=GRADLE_USER_HOME
+zipStorePath=wrapper/dists
+```
+
+可以发现 `distributionUrl` 分为 `gradle-xx-bin.zip` 和 `gradle-xx-all.zip`
+
+在Gradle的发行包中，`gradle-7.2-bin`和`gradle-7.2-all`是两种不同类型的分发包，它们的主要区别在于包含的内容和适用场景：
+
+### 1. **gradle-7.2-bin**
+
+- **内容**：`gradle-7.2-bin`是一个轻量级的二进制分发包，它只包含了运行Gradle构建工具所必需的二进制文件和库。它不包含源码和文档，因此体积较小，下载和安装速度更快。
+- **适用场景**：适合大多数开发者在日常开发中使用，尤其是那些不需要查看源码或文档的用户。它也适用于生产环境，因为其体积小、安装快速。
+- **优点**：体积小，安装和部署速度快。
+
+### 2. **gradle-7.2-all**
+
+- **内容**：`gradle-7.2-all`是一个全量分发包，它不仅包含了运行Gradle所需的二进制文件和库，还额外包含了源码和文档。因此，它的体积比`gradle-7.2-bin`要大。
+- **适用场景**：适合那些需要查看源码或文档的开发者，例如开发Gradle插件或进行调试的用户。它也适合离线环境，因为包含了所有必要的组件。
+- **优点**：提供了完整的开发支持，包括源码和文档，适合开发和调试。
+
+### 总结
+
+- 如果你只需要运行Gradle来构建项目，选择`gradle-7.2-bin`即可，因为它体积小且安装快速。
+- 如果你需要查看源码或文档，或者需要在离线环境中使用Gradle，那么`gradle-7.2-all`是更好的选择。
+
+
+
+
+
 2025年2月11日 15:22:35
